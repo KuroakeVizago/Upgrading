@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BallMovement : MonoBehaviour
 {
-    
+    [Header("Coin Colect")]
+    [SerializeField] int coinColected;
+    [SerializeField] Text coinText;
+
     [Header("Config : ")]
     [SerializeField] float speed = 45f;
     [SerializeField] float jumpForce = 350f;
@@ -16,6 +20,8 @@ public class BallMovement : MonoBehaviour
     {
         if (!rigidbody)
             rigidbody = GetComponent<Rigidbody>();
+
+        coinText.text = "Coin Colected: 0";
     }
 
     void FixedUpdate()
@@ -54,4 +60,15 @@ public class BallMovement : MonoBehaviour
             isGrounded = true;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigered");
+        if (other.gameObject.tag == "Coin")
+		{
+            coinColected += 1;
+            coinText.text = "Coin Colected: " + coinColected.ToString();
+
+            Destroy(other.transform.parent.gameObject);
+		}
+	}
 }
