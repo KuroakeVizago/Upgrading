@@ -26,7 +26,6 @@ public class FailTrigger : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.gameObject.transform.position = playerInitPosition;
-            Time.timeScale = 0.1f;
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
