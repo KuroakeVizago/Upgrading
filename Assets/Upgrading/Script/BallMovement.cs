@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class BallMovement : MonoBehaviour
 {
-    [Header("Coin Colect")]
-    [SerializeField] int coinColected;
+    [Header("Coin Colect : ")]
+    [SerializeField] public int coinCollected;
     [SerializeField] Text coinText;
 
     [Header("Config : ")]
@@ -45,7 +45,7 @@ public class BallMovement : MonoBehaviour
     void Jump()
     {
         if (isGrounded)
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 isGrounded = false;
                 rigidbody.velocity = rigidbody.velocity + (Vector3.up * jumpForce);
@@ -62,11 +62,10 @@ public class BallMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigered");
         if (other.gameObject.tag == "Coin")
 		{
-            coinColected += 1;
-            coinText.text = "Coin Colected: " + coinColected.ToString();
+            coinCollected += 1;
+            coinText.text = "Coin Colected: " + coinCollected.ToString();
 
             Destroy(other.transform.parent.gameObject);
 		}
